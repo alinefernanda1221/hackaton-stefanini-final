@@ -1,0 +1,64 @@
+<div class="jumbotron">
+	<h1>Editar Documento - #{{vm.documento.id}}</h1>
+	<hr width="50%" align="left">
+	<div class="row">
+		<div>
+			<div class="row">
+				<div class="col col-md-5">
+					Nome: <input type="text" ng-required="true"
+						ng-value="vm.documento.nome" ng-model="vm.documentoEditado.nome" />
+				</div>
+				<div class="col col-md-5">
+					Descricao: <input type="text" ng-value="vm.documento.descricao"
+						ng-model="vm.documentoEditado.descricao" />
+				</div>
+			</div>
+			<br><hr>
+			<div>
+				<h3>Adicionar Pagina</h1>
+				<hr width="50%" align="left">
+				<div class="row">
+					<div class="col col-md-3">
+						Nome: <input type="text" ng-required="true"
+							ng-model="vm.pagina.nome" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<input class="btn btn-success" type="button"
+							ng-click="vm.adicionaPagina(vm.pagina)" value="Adiciona Pagina" />
+					</div>
+				</div>
+			</div>
+			<br><hr>
+			<table class="table table-hover" ng-if="vm.documento.paginas">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Pagina Nome</th>
+						<th scope="col">Ações</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat='pagina in vm.documento.paginas track by $index'>
+					<td><b>{{$index+1}}</b></td>
+					<td>{{pagina.nome}}</td>
+					<td><input class="btn btn-danger" type="button"
+						value="Excluir" ng-click="vm.excluirPagina(pagina)"></td>
+				</tbody>
+			</table>
+			<br>
+			<hr>
+			<div class="row text-right">
+				<div class="col col-md-2">
+					<input class="btn btn-success" type="button" value="Salvar"
+						ng-click="vm.salvarEdicao(vm.documentoEditado)" />
+				</div>
+				<div class="col col-md-2">
+					<input class="btn btn-success" type="button" value="Voltar"
+						ng-click="vm.voltar()" />
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

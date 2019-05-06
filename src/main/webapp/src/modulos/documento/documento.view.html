@@ -1,0 +1,47 @@
+<div class="jumbotron text-center">
+	<h1>Pesquisa de Documentos</h1>
+	<hr width="50%" align="left">
+	<div class="row form-group">
+		<div class="col col-sm-3">
+			Pesquisar: <input type="text" placeholder="Nome documento"
+				ng-model="vm.pesquisa" />
+		</div>
+		<div class="col col-sm-3">
+			<input class="btn btn-success" type="button" value="Pesquisar"
+				ng-click="vm.pesquisa != null ? vm.buscarPorNome() : vm.buscarTodos()" />
+		</div>
+	</div>
+	<br>
+	<hr>
+	<div class="row">
+		<table class="table table-hover table-dark">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Documento</th>
+					<th scope="col">Páginas</th>
+					<th scope="col">Ações</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat='documento in vm.documentos'
+				ng-if="vm.documentos !== null">
+				<!--           <tr ng-repeat='pagina in documento.paginas'> -->
+				<td><b>{{documento.id}}</b></td>
+				<td>{{documento.nome}}</td>
+				<td>{{documento.paginas.length}}</td>
+				<!--             <td>{{documento.nome}}</td> -->
+				<td><input class="btn btn-success" type="button" value="Editar"
+					ng-click="vm.editar(documento)"> <input
+					class="btn btn-danger" type="button" value="Excluir"
+					ng-click="vm.excluir(documento.id)"></td>
+				<!--         </tr> -->
+			</tbody>
+		</table>
+		<br><hr>
+		<div class="row">
+			<input class="btn btn-success" type="button" value="Voltar"
+				ng-click="vm.voltar()">
+		</div>
+		<br><hr>
+	</div>
+</div>
