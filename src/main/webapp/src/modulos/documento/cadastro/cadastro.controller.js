@@ -15,6 +15,7 @@ export default class DocumentoCadastroController {
     
     function init(){
      /*inits*/
+     const endpoint = '/documento';
      vm.paginas = [];
      vm.adicionaPagina = adicionaPagina;
      vm.excluirPagina = excluirPagina;
@@ -27,7 +28,7 @@ export default class DocumentoCadastroController {
     		 vm.documento.paginas = getPaginas();    		 
     	 }
     	 
-    	 documentoService.post(vm.documento)
+    	 documentoService.post(vm.documento, endpoint)
     	 .then(function response(resp){
     		 vm.status = 'Gravado com sucesso!';
     		 alert(vm.status);

@@ -11,19 +11,19 @@ export default class DocumentoController {
     vm.excluir = null;
     /*Cadastro*/
     vm.cadastrarDocumento = null;
-    vm.maxSize = 20;
     vm.cadastrarPagina = null;
     vm.editar = null;
     vm.voltar = null;
-    
+
     init();
     
     function init(){ 
+    const endpoint = '/documento';	
     vm.editar = editarPagina;
     vm.voltar = voltar;
 
      vm.buscarTodos = function (){
-    	 documentoService.get()
+    	 documentoService.get(endpoint)
     	   .then(function response(resp){
     		   vm.documentos = resp.data;
     	 }).catch(function (error) {
@@ -32,7 +32,7 @@ export default class DocumentoController {
      } 
 
      vm.buscarPorNome = function (){
-    	 documentoService.getByName(vm.pesquisa)
+    	 documentoService.getByParam(vm.pesquisa , endpoint, '/nome/')
     	 .then(function response(resp){
     		 vm.documentos = resp.data;
     		 console.log(resp);     		  
@@ -42,9 +42,11 @@ export default class DocumentoController {
      }
      
      vm.excluir = function (id) {
-		documentoService.deleteById(id)
+		documentoService.deleteById(id, endpoint)
 		.then(function response(resp) {
 			console.log(resp);
+			alert('Documento deletado com sucesso')
+			vm.buscarTodos();
 		}).catch(function error(error) {
 			console.log(error);
 		});

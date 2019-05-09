@@ -14,6 +14,7 @@ export default class DocumentoEdicaoController {
 
     
     function init(){
+    const endpoint = '/pagina';
     vm.salvarEdicao = salvarEdicao;
     vm.documentoEditado = vm.documento;
     vm.excluirPagina = excluirPagina;
@@ -22,12 +23,12 @@ export default class DocumentoEdicaoController {
     
      function salvarEdicao(documento) {
     	 console.log(documento);
-    	 documentoService.patch(documento)
+    	 documentoService.patch(documento, '/documento')
     	 .then(function (resp) {
-    		 alert(resp.data.message);
+    		 alert('Gravado com sucesso');
 			console.log(resp);
 		}).catch(function (error) {
-			alert(resp.error.message);
+			alert(error.data.message);
 			console.log(error);
 		});
      }
@@ -35,7 +36,7 @@ export default class DocumentoEdicaoController {
      function excluirPagina(pagina) { //Remove pagina do Array
     	 var index = vm.documento.paginas.indexOf(pagina);
     	 vm.documento.paginas.splice(index, 1);
-    	 documentoService.deletePaginaById(pagina.id)
+    	 documentoService.deleteById(pagina.id, endpoint)
     	 .then(function (resp) {
     		 console.log(resp);
     	 }).catch(function (error) {
